@@ -47,3 +47,6 @@ while True:
             cv2.imwrite(PREP_DIR + FILENAME, blur_img )
         print ("finished analyzing " + FILENAME)
         shutil.move(RAW_DIR + FILENAME , OLD_DIR + FILENAME)
+
+    #remove this during real operations
+    exit(1)

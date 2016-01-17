@@ -46,10 +46,10 @@ class VectorMachine:
         for i in range(startInd, endInd):
             for key, val in emoDict.items():
                 try:
-                    img = Image.open(key+str(i)+".jpg")
+                    img = Image.open(path+key+str(i)+imgType.lower())
                     img = img.resize((basewidth, basewidth))
-                    img.save(key+str(i)+"compressed.jpg")
-                    pic = cv2.imread(key+str(i)+"compressed.jpg", 0)
+                    img.save(path+key+str(i)+"compressed"+imgType.lower())
+                    pic = cv2.imread(path+key+str(i)+"compressed"+imgType.lower(), 0)
 
                     images = np.append(images, [pic.ravel()], axis=0)
                     y.append(val)
@@ -72,9 +72,9 @@ class VectorMachine:
 
 if __name__ == '__main__':
     already_created = False
-    emoDict = {"happy" : 0, "sad" : 1} #, "angry" : 2}
+    emoDict = {"happy" : 0, "sad" : 1, "angry" : 2}
     vm = VectorMachine()
-    X,y = vm.readImages(90,emoDict)
+    X,y = vm.readImages(90, emoDict, path="../prep_dir/")
     if not already_created:
         print(X.shape)
         svm = vm.trainSVM(1, X, y)
